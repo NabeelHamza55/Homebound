@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Cache;
 
 class AuthController extends Controller
 {
-   
     public function view()
     {
         Cache::clear();
@@ -22,29 +21,39 @@ class AuthController extends Controller
     }
     public function view_login()
     {
+        if(Auth::check()) {
+            if(auth()->user()->role == 'admin') {
+                return redirect()->route('admin.dashboard');
+            } else {
+                return redirect()->route('user.dashboard');
+            }
+        }
         return view('auth.login');
     }
     public function createRegistration()
     {
+        if(Auth::check()) {
+            if(auth()->user()->role == 'admin') {
+                return redirect()->route('admin.dashboard');
+            } else {
+                return redirect()->route('user.dashboard');
+            }
+        }
         return view('auth.register');
     }
     protected function login(LoginRequest $request)
     {
-        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+        if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             $user = Auth::user();
             $token = $user->createToken('Token')->accessToken;
-            if ($user->type=="Admin")
-            {
+            if ($user->role == "Admin") {
                 $notificationMessage = "login success";
-                return view('welcome');
-            }
-            else
-            {
+                return redirect(route('admin.dashboard'))->with($notificationMessage);
+            } else {
                 $notificationMessage = "login success";
                 return redirect(route('user.dashboard'))->with($notificationMessage);
             }
-        }
-        else{
+        } else {
             return view('auth.login')->with('message', 'Invalid credentials');
         }
     }
@@ -55,8 +64,7 @@ class AuthController extends Controller
         $attribute['role'] = "User";
         $attribute['phone_number'] = $request->input('phone_number');
         $profilePicture = $request->file('profile_picture');
-        if ($profilePicture)
-        {
+        if ($profilePicture) {
             $publicPath = public_path('ProfilePicture');
             $profilePictureName = time().'.'.$profilePicture->getClientOriginalExtension();
             $profilePicture->move($publicPath, $profilePictureName);

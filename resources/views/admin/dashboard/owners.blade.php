@@ -1,12 +1,12 @@
 @extends('admin.layouts.dashboard')
-@section('title', 'Owners')
+@section('title', 'Clients')
 @section('content')
     <div class="dashboard-column right-content p-0">
         <section>
             <div class="container">
                 <div class="row d-flex mt-4">
                     <div class="col-md-6">
-                        <h4>Properties</h4>
+                        <h4>Clients</h4>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
                         <svg width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,203 +58,54 @@
 
         <div class="dashboard-content">
 
-            <div class="save-order-table">
+            <div class="save-order-table px-3">
                 <div class="table-responsive">
                     <table style="background-color: #ffff;" class="table filter-table">
-                        <tr>
-                            <td class="order-column" width="40%">
-                                <div class="order-row d-flex align-items-center">
-                                    <div class="order-img">
-                                        <img style=" width: 3.5rem; margin-right: 0.5rem;" src="images/Rectangle 109.png">
+                        @forelse ($collection as $data)
+                            <tr>
+                                <td class="order-column" width="40%">
+                                    <div class="order-row d-flex align-items-center">
+                                        <div class="order-img">
+                                            <img style=" width: 3.5rem; margin-right: 0.5rem;"
+                                                src="{{ asset('ProfilePicture/' . $data->profile_picture) }}">
+                                        </div>
+                                        <div class="order-text">
+                                            <p style="font-weight: 600;">{{ $data->name }}</p>
+                                        </div>
+                                        <div style="margin-left: 2rem;" class="order-text ">
+                                            <span>Phone number</span>
+                                            <p style="font-weight: 600;">{{ $data->phone_number }}</p>
+                                        </div>
                                     </div>
-                                    <div class="order-text">
-                                        <p style="font-weight: 600;">Rayna Curtis</p>
+                                </td>
+                                <td width="20%" align="center">
+                                    <span>Email</span>
+                                    <p style="font-weight: 600;">{{ $data->email }}</p>
+                                </td>
+                                <td width="20%" align="center">
+                                    <span>Address</span>
+                                    <p style="font-weight: 600;">234 Washington, DC</p>
+                                </td>
+                                <td width="20%">
+                                    <div class="d-flex justify-content-end
+                                pe-">
+                                        <a class="eye-box mx-2" href="#"><img src="images/eye.png" alt="Edit">
+                                        </a>
+                                        <a class="bin-box ms-2" href="#"><img src="images/trash-icon.png"
+                                                alt="Delete">
+                                        </a>
                                     </div>
-                                    <div style="margin-left: 2rem;" class="order-text ">
-                                        <span>Phone number</span>
-                                        <p style="font-weight: 600;">(202) 456 7890</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td width="20%" align="center">
-                                <span>Email</span>
-                                <p style="font-weight: 600;">mail@gmail.com</p>
-                            </td>
-                            <td width="20%" align="center">
-                                <span>Address</span>
-                                <p style="font-weight: 600;">234 Washington, DC</p>
-                            </td>
-                            <td width="20%">
-                                <div class="d-flex justify-content-end
-                            pe-">
-                                    <a class="eye-box mx-2" href="#"><img src="images/eye.png" alt="Edit">
-                                    </a>
-                                    <a class="bin-box ms-2" href="#"><img src="images/trash-icon.png" alt="Delete">
-                                    </a>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="bg-transparent" style="height: 10px;"></td>
-                        </tr>
-                        <tr>
-                            <td class="order-column" width="40%">
-                                <div class="order-row d-flex align-items-center">
-                                    <div class="order-img">
-                                        <img style=" width: 3.5rem; margin-right: 0.5rem;" src="images/Rectangle 109.png">
-                                    </div>
-                                    <div class="order-text">
-                                        <p style="font-weight: 600;">Rayna Curtis</p>
-                                    </div>
-                                    <div style="margin-left: 2rem;" class="order-text ">
-                                        <span>Phone number</span>
-                                        <p style="font-weight: 600;">(202) 456 7890</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td width="20%" align="center">
-                                <span>Email</span>
-                                <p style="font-weight: 600;">mail@gmail.com</p>
-                            </td>
-                            <td width="20%" align="center">
-                                <span>Address</span>
-                                <p style="font-weight: 600;">234 Washington, DC</p>
-                            </td>
-                            <td width="20%">
-                                <div class="d-flex justify-content-end
-                            pe-">
-                                    <a class="eye-box mx-2" href="#"><img src="images/eye.png" alt="Edit">
-                                    </a>
-                                    <a class="bin-box ms-2" href="#"><img src="images/trash-icon.png"
-                                            alt="Delete">
-                                    </a>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="bg-transparent" style="height: 10px;"></td>
-                        </tr>
-                        <tr>
-                            <td class="order-column" width="40%">
-                                <div class="order-row d-flex align-items-center">
-                                    <div class="order-img">
-                                        <img style=" width: 3.5rem; margin-right: 0.5rem;" src="images/Rectangle 109.png">
-                                    </div>
-                                    <div class="order-text">
-                                        <p style="font-weight: 600;">Rayna Curtis</p>
-                                    </div>
-                                    <div style="margin-left: 2rem;" class="order-text ">
-                                        <span>Phone number</span>
-                                        <p style="font-weight: 600;">(202) 456 7890</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td width="20%" align="center">
-                                <span>Email</span>
-                                <p style="font-weight: 600;">mail@gmail.com</p>
-                            </td>
-                            <td width="20%" align="center">
-                                <span>Address</span>
-                                <p style="font-weight: 600;">234 Washington, DC</p>
-                            </td>
-                            <td width="20%">
-                                <div class="d-flex justify-content-end
-                            pe-">
-                                    <a class="eye-box mx-2" href="#"><img src="images/eye.png" alt="Edit">
-                                    </a>
-                                    <a class="bin-box ms-2" href="#"><img src="images/trash-icon.png"
-                                            alt="Delete">
-                                    </a>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="bg-transparent" style="height: 10px;"></td>
-                        </tr>
-                        <tr>
-                            <td class="order-column" width="40%">
-                                <div class="order-row d-flex align-items-center">
-                                    <div class="order-img">
-                                        <img style=" width: 3.5rem; margin-right: 0.5rem;" src="images/Rectangle 109.png">
-                                    </div>
-                                    <div class="order-text">
-                                        <p style="font-weight: 600;">Rayna Curtis</p>
-                                    </div>
-                                    <div style="margin-left: 2rem;" class="order-text ">
-                                        <span>Phone number</span>
-                                        <p style="font-weight: 600;">(202) 456 7890</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td width="20%" align="center">
-                                <span>Email</span>
-                                <p style="font-weight: 600;">mail@gmail.com</p>
-                            </td>
-                            <td width="20%" align="center">
-                                <span>Address</span>
-                                <p style="font-weight: 600;">234 Washington, DC</p>
-                            </td>
-                            <td width="20%">
-                                <div class="d-flex justify-content-end
-                            pe-">
-                                    <a class="eye-box mx-2" href="#"><img src="images/eye.png" alt="Edit">
-                                    </a>
-                                    <a class="bin-box ms-2" href="#"><img src="images/trash-icon.png"
-                                            alt="Delete">
-                                    </a>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="bg-transparent" style="height: 10px;"></td>
-                        </tr>
-                        <tr>
-                            <td class="order-column" width="40%">
-                                <div class="order-row d-flex align-items-center">
-                                    <div class="order-img">
-                                        <img style=" width: 3.5rem; margin-right: 0.5rem;" src="images/Rectangle 109.png">
-                                    </div>
-                                    <div class="order-text">
-                                        <p style="font-weight: 600;">Rayna Curtis</p>
-                                    </div>
-                                    <div style="margin-left: 2rem;" class="order-text ">
-                                        <span>Phone number</span>
-                                        <p style="font-weight: 600;">(202) 456 7890</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td width="20%" align="center">
-                                <span>Email</span>
-                                <p style="font-weight: 600;">mail@gmail.com</p>
-                            </td>
-                            <td width="20%" align="center">
-                                <span>Address</span>
-                                <p style="font-weight: 600;">234 Washington, DC</p>
-                            </td>
-                            <td width="20%">
-                                <div class="d-flex justify-content-end
-                            pe-">
-                                    <a class="eye-box mx-2" href="#"><img src="images/eye.png" alt="Edit">
-                                    </a>
-                                    <a class="bin-box ms-2" href="#"><img src="images/trash-icon.png"
-                                            alt="Delete">
-                                    </a>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="bg-transparent" style="height: 10px;"></td>
-                        </tr>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td class="text-center">No Client Available</td>
+                            </tr>
+                        @endforelse
 
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

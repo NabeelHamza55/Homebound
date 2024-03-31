@@ -61,264 +61,76 @@
         <div class="container">
             <div class="row">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <div class="col col-md-4">
-                        <div class="card">
-                            <img src="images/Rectangle 109 (1).png" class="card-img-top" alt="...">
-                            <div style="font-size: 12px; padding: 0; padding-left: 5px;" class="card-body">
-                                <h6 class="card-title fw-700 pt-3 pb-1">
-                                    <svg width="15" height="17" viewBox="0 0 15 17" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M14.1095 5.89004C13.3013 2.33375 10.1992 0.732651 7.47421 0.732651C7.47421 0.732651 7.47421 0.732651 7.46651 0.732651C4.74926 0.732651 1.63943 2.32605 0.831186 5.88234C-0.0694321 9.8543 2.36301 13.2182 4.56452 15.335C5.38047 16.1201 6.42734 16.5127 7.47421 16.5127C8.52108 16.5127 9.56796 16.1201 10.3762 15.335C12.5777 13.2182 15.0102 9.862 14.1095 5.89004ZM7.47421 9.74654C6.13483 9.74654 5.04947 8.66117 5.04947 7.32179C5.04947 5.98241 6.13483 4.89705 7.47421 4.89705C8.81359 4.89705 9.89895 5.98241 9.89895 7.32179C9.89895 8.66117 8.81359 9.74654 7.47421 9.74654Z"
-                                            fill="#B38A51" />
-                                    </svg>
-                                    Kimberly Armstrong Co.
-                                </h6>
-                                <p style="border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;" class="card-text">Lorem
-                                    Ipsum
-                                    is simply
-                                    dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's</p>
-                            </div>
-                            <div style="padding: 1rem;" class="row">
+                    @forelse ($collection as $property)
+                        <div class="col col-md-4">
+                            <div class="card rounded">
+                                @if (isset(json_decode($property['images'])[0]))
+                                    @if (str_contains(json_decode($property['images'])[0], 'https'))
+                                        <img src="{{ json_decode($property['images'])[0] }}" class='img-fluid'
+                                            alt="no image">
+                                    @else
+                                        <img src="{{ asset('/ProfilePicture/' . json_decode($property['images'])[0]) }}"
+                                            class='img-fluid' alt="no image">
+                                    @endif
+                                @else
+                                    <img src="{{ asset('/default-image.jpg') }}" class='img-fluid' alt="no image">
+                                @endif
+                                <div style="font-size: 12px; padding: 0; padding-left: 5px;" class="card-body">
+                                    <h6 class="card-title fw-700 pt-3 pb-1">
+                                        <svg width="15" height="17" viewBox="0 0 15 17" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M14.1095 5.89004C13.3013 2.33375 10.1992 0.732651 7.47421 0.732651C7.47421 0.732651 7.47421 0.732651 7.46651 0.732651C4.74926 0.732651 1.63943 2.32605 0.831186 5.88234C-0.0694321 9.8543 2.36301 13.2182 4.56452 15.335C5.38047 16.1201 6.42734 16.5127 7.47421 16.5127C8.52108 16.5127 9.56796 16.1201 10.3762 15.335C12.5777 13.2182 15.0102 9.862 14.1095 5.89004ZM7.47421 9.74654C6.13483 9.74654 5.04947 8.66117 5.04947 7.32179C5.04947 5.98241 6.13483 4.89705 7.47421 4.89705C8.81359 4.89705 9.89895 5.98241 9.89895 7.32179C9.89895 8.66117 8.81359 9.74654 7.47421 9.74654Z"
+                                                fill="#B38A51" />
+                                        </svg>
+                                        {{ $property['address'] ? $property['address'] : '3964 Reka Dr APT D01, Anchorage,AK,99508' }}
+                                    </h6>
+                                    <p style="border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;" class="card-text">
+                                        {{ $property['description'] ?? '' }}</p>
+                                </div>
+                                <div style="padding: 1rem;" class="row">
+                                    @php
+                                        $images = json_decode($property['images']);
+                                    @endphp
 
-                                <div class="col-md-3 p-0">
-                                    <img class="pe-1" src="images/1.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/2.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/3.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/4.png" alt="">
-                                </div>
-                                <div class=" d-flex p-0 mt-3">
-                                    <button
-                                        style="padding: 10px 38px;background-color: #ffff; border: 1px solid #B38A51;border-radius: 12px;"
-                                        class="btn ms-1 back-to-home-btn1">Edit</button>
-                                    <button
-                                        style="padding: 10px 35px;  background-color: #FF0000; color: #ffff; border-radius: 12px;"
-                                        class=" btn ms-2">Delete</button>
+                                    @php $imageCount = 0; @endphp
+
+                                    @foreach ($images as $image)
+                                        @if ($imageCount < 4)
+                                            @if (str_contains($image, 'https'))
+                                                <div class="col-md-3 p-0">
+                                                    <img style="border-radius: 15px" class="pe-1"
+                                                        src="{{ $image }}" alt="no image" class="selectable-image">
+                                                </div>
+                                            @else
+                                                <div class="col-md-3 p-0">
+                                                    <img style="border-radius: 15px" class="pe-1"
+                                                        src="{{ asset('/ProfilePicture/' . $image) ?? '' }}">
+                                                </div>
+                                            @endif
+                                        @endif
+                                        @php $imageCount++; @endphp
+                                    @endforeach
+                                    <div class=" d-flex p-0 mt-3">
+                                        <button
+                                            style="padding: 10px 38px;background-color: #ffff; border: 1px solid #B38A51;border-radius: 12px;"
+                                            class="btn ms-1 back-to-home-btn1">Edit</button>
+                                        <button
+                                            style="padding: 10px 35px;  background-color: #FF0000; color: #ffff; border-radius: 12px;"
+                                            class=" btn ms-2">Delete</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col col-md-4">
-                        <div class="card">
-                            <img src="images/Rectangle 109 (2).png" class="card-img-top" alt="...">
-                            <div style="font-size: 12px; padding: 0; padding-left: 5px;" class="card-body">
-                                <h6 class="card-title fw-700 pt-3 pb-1">
-                                    <svg width="15" height="17" viewBox="0 0 15 17" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M14.1095 5.89004C13.3013 2.33375 10.1992 0.732651 7.47421 0.732651C7.47421 0.732651 7.47421 0.732651 7.46651 0.732651C4.74926 0.732651 1.63943 2.32605 0.831186 5.88234C-0.0694321 9.8543 2.36301 13.2182 4.56452 15.335C5.38047 16.1201 6.42734 16.5127 7.47421 16.5127C8.52108 16.5127 9.56796 16.1201 10.3762 15.335C12.5777 13.2182 15.0102 9.862 14.1095 5.89004ZM7.47421 9.74654C6.13483 9.74654 5.04947 8.66117 5.04947 7.32179C5.04947 5.98241 6.13483 4.89705 7.47421 4.89705C8.81359 4.89705 9.89895 5.98241 9.89895 7.32179C9.89895 8.66117 8.81359 9.74654 7.47421 9.74654Z"
-                                            fill="#B38A51" />
-                                    </svg>
-                                    Kimberly Armstrong Co.
-                                </h6>
-                                <p style="border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;" class="card-text">Lorem
-                                    Ipsum
-                                    is simply
-                                    dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's</p>
-                            </div>
-                            <div style="padding: 1rem;" class="row">
-
-                                <div class="col-md-3 p-0">
-                                    <img class="pe-1" src="images/1.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/2.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/3.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/4.png" alt="">
-                                </div>
-                                <div class=" d-flex p-0 mt-3">
-                                    <button
-                                        style="padding: 10px 38px;background-color: #ffff; border: 1px solid #B38A51;border-radius: 12px;"
-                                        class="btn ms-1 back-to-home-btn1">Edit</button>
-                                    <button
-                                        style="padding: 10px 35px;  background-color: #FF0000; color: #ffff; border-radius: 12px;"
-                                        class=" btn ms-2">Delete</button>
-                                </div>
-                            </div>
+                    @empty
+                        <div class="col col-md-12">
+                            <p class="text-center">No Property Available</p>
                         </div>
-                    </div>
-                    <div class="col col-md-4">
-                        <div class="card">
-                            <img src="images/Rectangle 109 (3).png" class="card-img-top" alt="...">
-                            <div style="font-size: 12px; padding: 0; padding-left: 5px;" class="card-body">
-                                <h6 class="card-title fw-700 pt-3 pb-1">
-                                    <svg width="15" height="17" viewBox="0 0 15 17" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M14.1095 5.89004C13.3013 2.33375 10.1992 0.732651 7.47421 0.732651C7.47421 0.732651 7.47421 0.732651 7.46651 0.732651C4.74926 0.732651 1.63943 2.32605 0.831186 5.88234C-0.0694321 9.8543 2.36301 13.2182 4.56452 15.335C5.38047 16.1201 6.42734 16.5127 7.47421 16.5127C8.52108 16.5127 9.56796 16.1201 10.3762 15.335C12.5777 13.2182 15.0102 9.862 14.1095 5.89004ZM7.47421 9.74654C6.13483 9.74654 5.04947 8.66117 5.04947 7.32179C5.04947 5.98241 6.13483 4.89705 7.47421 4.89705C8.81359 4.89705 9.89895 5.98241 9.89895 7.32179C9.89895 8.66117 8.81359 9.74654 7.47421 9.74654Z"
-                                            fill="#B38A51" />
-                                    </svg>
-                                    Kimberly Armstrong Co.
-                                </h6>
-                                <p style="border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;" class="card-text">Lorem
-                                    Ipsum
-                                    is simply
-                                    dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's</p>
-                            </div>
-                            <div style="padding: 1rem;" class="row">
+                    @endforelse
 
-                                <div class="col-md-3 p-0">
-                                    <img class="pe-1" src="images/1.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/2.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/3.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/4.png" alt="">
-                                </div>
-                                <div class=" d-flex p-0 mt-3">
-                                    <button
-                                        style="padding: 10px 38px;background-color: #ffff; border: 1px solid #B38A51;border-radius: 12px;"
-                                        class="btn ms-1 back-to-home-btn1">Edit</button>
-                                    <button
-                                        style="padding: 10px 35px;  background-color: #FF0000; color: #ffff; border-radius: 12px;"
-                                        class=" btn ms-2 ">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-md-4">
-                        <div class="card">
-                            <img src="images/Rectangle 109 (1).png" class="card-img-top" alt="...">
-                            <div style="font-size: 12px; padding: 0; padding-left: 5px;" class="card-body">
-                                <h6 class="card-title fw-700 pt-3 pb-1">
-                                    <svg width="15" height="17" viewBox="0 0 15 17" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M14.1095 5.89004C13.3013 2.33375 10.1992 0.732651 7.47421 0.732651C7.47421 0.732651 7.47421 0.732651 7.46651 0.732651C4.74926 0.732651 1.63943 2.32605 0.831186 5.88234C-0.0694321 9.8543 2.36301 13.2182 4.56452 15.335C5.38047 16.1201 6.42734 16.5127 7.47421 16.5127C8.52108 16.5127 9.56796 16.1201 10.3762 15.335C12.5777 13.2182 15.0102 9.862 14.1095 5.89004ZM7.47421 9.74654C6.13483 9.74654 5.04947 8.66117 5.04947 7.32179C5.04947 5.98241 6.13483 4.89705 7.47421 4.89705C8.81359 4.89705 9.89895 5.98241 9.89895 7.32179C9.89895 8.66117 8.81359 9.74654 7.47421 9.74654Z"
-                                            fill="#B38A51" />
-                                    </svg>
-                                    Kimberly Armstrong Co.
-                                </h6>
-                                <p style="border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;" class="card-text">Lorem
-                                    Ipsum
-                                    is simply
-                                    dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's</p>
-                            </div>
-                            <div style="padding: 1rem;" class="row">
-
-                                <div class="col-md-3 p-0">
-                                    <img class="pe-1" src="images/1.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/2.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/3.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/4.png" alt="">
-                                </div>
-                                <div class=" d-flex p-0 mt-3">
-                                    <button
-                                        style="padding: 10px 38px;background-color: #ffff; border: 1px solid #B38A51;border-radius: 12px;"
-                                        class="btn ms-1 back-to-home-btn1">Edit</button>
-                                    <button
-                                        style="padding: 10px 35px;  background-color: #FF0000; color: #ffff; border-radius: 12px;"
-                                        class=" btn ms-2">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-md-4">
-                        <div class="card">
-                            <img src="images/Rectangle 109 (2).png" class="card-img-top" alt="...">
-                            <div style="font-size: 12px; padding: 0; padding-left: 5px;" class="card-body">
-                                <h6 class="card-title fw-700 pt-3 pb-1">
-                                    <svg width="15" height="17" viewBox="0 0 15 17" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M14.1095 5.89004C13.3013 2.33375 10.1992 0.732651 7.47421 0.732651C7.47421 0.732651 7.47421 0.732651 7.46651 0.732651C4.74926 0.732651 1.63943 2.32605 0.831186 5.88234C-0.0694321 9.8543 2.36301 13.2182 4.56452 15.335C5.38047 16.1201 6.42734 16.5127 7.47421 16.5127C8.52108 16.5127 9.56796 16.1201 10.3762 15.335C12.5777 13.2182 15.0102 9.862 14.1095 5.89004ZM7.47421 9.74654C6.13483 9.74654 5.04947 8.66117 5.04947 7.32179C5.04947 5.98241 6.13483 4.89705 7.47421 4.89705C8.81359 4.89705 9.89895 5.98241 9.89895 7.32179C9.89895 8.66117 8.81359 9.74654 7.47421 9.74654Z"
-                                            fill="#B38A51" />
-                                    </svg>
-                                    Kimberly Armstrong Co.
-                                </h6>
-                                <p style="border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;" class="card-text">Lorem
-                                    Ipsum
-                                    is simply
-                                    dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's</p>
-                            </div>
-                            <div style="padding: 1rem;" class="row">
-
-                                <div class="col-md-3 p-0">
-                                    <img class="pe-1" src="images/1.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/2.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/3.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/4.png" alt="">
-                                </div>
-                                <div class=" d-flex p-0 mt-3">
-                                    <button
-                                        style="padding: 10px 38px;background-color: #ffff; border: 1px solid #B38A51;border-radius: 12px;"
-                                        class="btn ms-1 back-to-home-btn1">Edit</button>
-                                    <button
-                                        style="padding: 10px 35px;  background-color: #FF0000; color: #ffff; border-radius: 12px;"
-                                        class=" btn ms-2">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-md-4">
-                        <div class="card">
-                            <img src="images/Rectangle 109 (3).png" class="card-img-top" alt="...">
-                            <div style="font-size: 12px; padding: 0; padding-left: 5px;" class="card-body">
-                                <h6 class="card-title fw-700 pt-3 pb-1">
-                                    <svg width="15" height="17" viewBox="0 0 15 17" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M14.1095 5.89004C13.3013 2.33375 10.1992 0.732651 7.47421 0.732651C7.47421 0.732651 7.47421 0.732651 7.46651 0.732651C4.74926 0.732651 1.63943 2.32605 0.831186 5.88234C-0.0694321 9.8543 2.36301 13.2182 4.56452 15.335C5.38047 16.1201 6.42734 16.5127 7.47421 16.5127C8.52108 16.5127 9.56796 16.1201 10.3762 15.335C12.5777 13.2182 15.0102 9.862 14.1095 5.89004ZM7.47421 9.74654C6.13483 9.74654 5.04947 8.66117 5.04947 7.32179C5.04947 5.98241 6.13483 4.89705 7.47421 4.89705C8.81359 4.89705 9.89895 5.98241 9.89895 7.32179C9.89895 8.66117 8.81359 9.74654 7.47421 9.74654Z"
-                                            fill="#B38A51" />
-                                    </svg>
-                                    Kimberly Armstrong Co.
-                                </h6>
-                                <p style="border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;" class="card-text">Lorem
-                                    Ipsum
-                                    is simply
-                                    dummy text of the printing and
-                                    typesetting industry. Lorem Ipsum has been the industry's</p>
-                            </div>
-                            <div style="padding: 1rem;" class="row">
-
-                                <div class="col-md-3 p-0">
-                                    <img class="pe-1" src="images/1.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/2.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/3.png" alt="">
-                                </div>
-                                <div class="col-md-3 p-0"><img class="pe-1" src="images/4.png" alt="">
-                                </div>
-                                <div class=" d-flex p-0 mt-3">
-                                    <button
-                                        style="padding: 10px 38px;background-color: #ffff; border: 1px solid #B38A51;border-radius: 12px;"
-                                        class="btn ms-1 back-to-home-btn1">Edit</button>
-                                    <button
-                                        style="padding: 10px 35px;  background-color: #FF0000; color: #ffff; border-radius: 12px;"
-                                        class=" btn ms-2">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
-        <!-- <div class="dashboard-content">
-                <div class="add-properties"> -->
-
-
     </div>
 
 @endsection
