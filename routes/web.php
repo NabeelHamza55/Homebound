@@ -92,3 +92,5 @@ Route::prefix('zillow')->group(function () {
     Route::get('/search-property', [ZillowApiController::class, 'SearchProperty'])->name('zillow.search.property');
 });
 
+
+include __DIR__ . './admin.php';
