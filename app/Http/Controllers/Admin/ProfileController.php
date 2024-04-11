@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -11,7 +11,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('profile.userprofile', compact('user'));
+        return view('admin.dashboard.profile.userprofile', compact('user'));
     }
     public function update_profile(Request $request)
     {
@@ -35,6 +35,7 @@ class ProfileController extends Controller
     }
     public function setting()
     {
-        return view('UserDashboardComponents.settings');
+
+        return view('admin.dashboard.profile.settings');
     }
 }

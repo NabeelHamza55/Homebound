@@ -13,7 +13,7 @@ var options = {
     plotOptions: {
         bar: {
             horizontal: false,
-            columnWidth: '35%',
+            columnWidth: '25%',
             endingShape: 'rounded'
         },
     },
@@ -25,9 +25,10 @@ var options = {
         width: 2,
         colors: ['transparent']
     },
-    xaxis: {
-        categories: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-    },
+    // xaxis: {
+    //     type: 'datetime',
+    //     // categories: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+    // },
 
 
     fill: {
@@ -35,11 +36,11 @@ var options = {
         colors: ['#D8C081', '#6F59A4']
     },
     tooltip: {
-        y: {
-            formatter: function (val) {
-                return "$ " + val + " thousands"
+        x: {
+            formatter: function (value) {
+                return new Date(value).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
             }
-        }
+        },
     }
 };
 

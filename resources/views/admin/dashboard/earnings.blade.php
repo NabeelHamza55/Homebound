@@ -11,7 +11,7 @@
                         </div>
                         <div class="counter-text">
                             <span>Total Orders</span>
-                            <h3>24</h3>
+                            <h3>{{ $activeOrders }}</h3>
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
 
                         <div class="counter-text">
                             <span>Total Amount</span>
-                            <h3>1.3K</h3>
+                            <h3>${{ $earnings }}</h3>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="counter-text">
                             <span>Earnings</span>
-                            <h3>4.5K</h3>
+                            <h3>${{ $earnings }}</h3>
                         </div>
                     </div>
                 </div>
@@ -45,18 +45,34 @@
                         </div>
                         <div class="counter-text">
                             <span>Cancel orders</span>
-                            <h3>76</h3>
+                            <h3>{{ $cancelledOrders }}</h3>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="dashboard-graph graph-text">
                 <h2 class="">Total Earnings</h2>
-                <span class="fw-bold ">$2.5k</span>
+                <span class="fw-bold ">${{ $earnings }}</span>
             </div>
             <div class="row">
                 <div id="chart" class="col-12"></div>
             </div>
         </div>
     </div>
+    {{-- {{ dd($chartLabels) }} --}}
+@endsection
+@section('scripts')
+    <script src="{{ asset('admin/libs/apexcharts/apexcharts.line.js') }}"></script>
+    <script>
+        chart.updateOptions({
+            xaxis: {
+                categories: @json($chartLabels)
+            }
+        });
+        chart.updateSeries([{
+            name: 'Earnings',
+            data: @json($chartData),
+        }]);
+    </script>
+
 @endsection

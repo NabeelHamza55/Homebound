@@ -11,6 +11,13 @@ class OrderController extends Controller
     public function index()
     {
         $collection  = Order::all();
+        // dd($collection);
         return view("admin.dashboard.orders", compact("collection"));
+    }
+    public function destroy($id)
+    {
+        $data = Order::find($id);
+        $data->delete();
+        return redirect()->route('admin.orders');
     }
 }

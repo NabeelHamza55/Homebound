@@ -76,9 +76,9 @@ Route::middleware('auth', 'RevalidateBackHistory')->group(function () {
         Route::get('/checkout/success', [StripeController::class, 'stripeCheckoutSuccess'])->name('checkout.success');
     });
 
-    Route::get('/setting', [ProfileController::class,'setting'])->name('profile.setting');
     Route::get('/billing', [BillingController::class,'index'])->name('billing');
     Route::post('/billing/store', [BillingController::class,'store'])->name('billing.store');
+    Route::get('/setting', [ProfileController::class,'setting'])->name('profile.setting');
     Route::get('/profile', [ProfileController::class,'index'])->name('user.profile');
     Route::post('/update', [ProfileController::class,'update_profile'])->name('update.profile');
     Route::get('/logout', [AuthController::class,'destroy'])->name('logout');

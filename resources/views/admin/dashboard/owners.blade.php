@@ -36,8 +36,8 @@
                     </div>
                     <div class="col-md-6 d-flex justify-content-end p-0">
                         <section class="back-home1">
-                            <a href="#" class="back-to-home-btn ms-4">Add Property</a>
-                            <a href="#" class="back-to-home-btn1 ms-2">
+                            <a href="{{ route('admin.user.create', 'admin') }}" class="back-to-home-btn ms-4">Add Owner</a>
+                            {{-- <a href="#" class="back-to-home-btn1 ms-2">
                                 <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.10425 9.57657H28.7297" stroke="#B38A51" stroke-width="2.46254"
@@ -46,7 +46,7 @@
                                         stroke-linecap="round" />
                                     <path d="M13.6808 23.2574H19.1531" stroke="#B38A51" stroke-width="2.46254"
                                         stroke-linecap="round" />
-                                </svg> Filter</a>
+                                </svg> Filter</a> --}}
 
                         </section>
 
@@ -89,11 +89,13 @@
                                 <td width="20%">
                                     <div class="d-flex justify-content-end
                                 pe-">
-                                        <a class="eye-box mx-2" href="#"><img src="images/eye.png" alt="Edit">
-                                        </a>
-                                        <a class="bin-box ms-2" href="#"><img src="images/trash-icon.png"
-                                                alt="Delete">
-                                        </a>
+                                        {{-- <a class="eye-box mx-2" href="#"><img src="images/eye.png" alt="Edit">
+                                        </a> --}}
+                                        @if (auth()->user()->id != $data->id)
+                                            <a class="bin-box ms-2" href="{{ route('admin.user.delete', $data->id) }}"><img
+                                                    src="images/trash-icon.png" alt="Delete">
+                                            </a>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

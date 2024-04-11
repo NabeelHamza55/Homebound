@@ -35,14 +35,13 @@
                                             <img src="images/product-img.png">
                                         </div>
                                         <div class="order-text">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                industry. Lorem Ipsum has been the industry's</p>
+                                            <p>{{ $data->book_title }}</p>
                                         </div>
                                     </div>
                                 </td>
                                 <td width="20%" align="center">
                                     <span>QTY</span>
-                                    <strong>2</strong>
+                                    <strong>{{ $data->quantity }}</strong>
                                 </td>
                                 <td width="20%" align="center"><span class="avaible-badge">Active</span></td>
                                 <td width="20%" align="right">
@@ -50,8 +49,9 @@
                                         <div class="d-flex">
                                             <a class="eye-box mx-2" href="#"><img src="images/eye.png" alt="Edit">
                                             </a>
-                                            <a class="bin-box ms-2" href="#"><img src="images/trash-icon.png"
-                                                    alt="Delete">
+                                            <a class="bin-box ms-2"
+                                                href="{{ route('admin.orders.delete', $data->id) }}"><img
+                                                    src="images/trash-icon.png" alt="Delete">
                                             </a>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                                 <td colspan="4" class="bg-transparent" style="height: 10px;"></td>
                             </tr>
                         @endforeach
-                        <tr>
+                        {{-- <tr>
                             <td class="order-column" width="40%">
                                 <div class="order-row d-flex align-items-center">
                                     <div class="order-img">
@@ -188,7 +188,7 @@
                         </tr>
                         <tr>
                             <td colspan="4" class="bg-transparent" style="height: 10px;"></td>
-                        </tr>
+                        </tr> --}}
 
                     </table>
                 </div>

@@ -464,13 +464,13 @@ a.setting-button {
     /* margin-right: 0; */
 }
 
-/* .dashbaord-banner {
-    background: url(../images/dashboard-banner.png) no-repeat;
+.dashbaord-banner {
+    background: url(https://hombound.test/images/dashboard-banner.png) no-repeat;
     padding-bottom: 21%;
     margin-top: 30px;
     margin-bottom: 25px;
     background-size: 100% 100%;
-} */
+}
 .graph-text h2 {
     font-size: 28px;
     font-weight: 500;

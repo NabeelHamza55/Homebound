@@ -13,4 +13,10 @@ class PropertyController extends Controller
         $collection  = Property::all();
         return view("admin.dashboard.properties", compact("collection"));
     }
+    public function destroy($id)
+    {
+        $data = Property::find($id);
+        $data->delete();
+        return redirect()->route('admin.properties');
+    }
 }

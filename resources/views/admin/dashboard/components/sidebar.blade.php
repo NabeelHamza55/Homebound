@@ -1,11 +1,11 @@
 <div class="dashboard-column leftside-bar ">
     <div class="top-logo text-center">
-        <a href=""><img src="images/logo.png"></a>
+        <a href=""><img src="{{ asset('images/logo.png') }}"></a>
     </div>
     <div class="sidebar-list">
         <ul class="menu-list">
             <li>
-                <a href="{{ route('admin.owners') }}"><i class="dashboard-icon"></i> Dashboard</a>
+                <a href="{{ route('admin.dashboard') }}"><i class="dashboard-icon"></i> Dashboard</a>
             </li>
             <li>
                 <a href="{{ route('admin.properties') }}"><i class="order-icon"></i> Properties</a>
@@ -28,14 +28,14 @@
         <div class="dropdown">
             <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                <img src="images/user-img.png">
-                Jhon Doe
+                <img src="{{ asset('/ProfilePicture/' . auth()->user()->profile_picture) }}">
+                {{ auth()->check() ? auth()->user()->name : 'N/A' }}
                 <span>My Account <i class="fa fa-caret-down"></i></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Profile</a></li>
+                <li><a class="dropdown-item" href="{{ route('admin.profile.setting') }}">Profile Setting</a></li>
+                <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
             </ul>
         </div>
         <a href="" class="setting-button"><i class="setting-icon"></i></a>

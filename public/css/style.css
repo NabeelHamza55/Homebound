@@ -1,6 +1,6 @@
 *{
-    padding: 0; 
-    margin: 0;  
+    padding: 0;
+    margin: 0;
     font-family: 'Inter';
 }
 body{
@@ -88,12 +88,12 @@ img {
 }
 .back-banner.create-account {
     background: url(../images/create-account-banner.png) no-repeat;
-    background-size: 100% 100%;   
+    background-size: 100% 100%;
 }
 .back-banner.forgot {
     background: url(../images/forgot-banner.png) no-repeat;
-    background-size: 100% 100%;  
-    background-size: cover; 
+    background-size: 100% 100%;
+    background-size: cover;
 }
 .login-box {
     max-width: 400px;
@@ -397,7 +397,7 @@ a.setting-button {
     margin-right: 0;
 }
 .dashbaord-banner {
-    background: url(../images/dashboard-banner.png) no-repeat;
+    background: url(https://hombound.test/images/dashboard-banner.png) no-repeat;
     padding-bottom: 21%;
     margin-top: 30px;
     margin-bottom: 25px;
@@ -673,7 +673,7 @@ button.btn.cst-res-button {
 .upload-property .inner-upload-property:not(:last-child) {
     margin-right: 20px;
 }
-.saved-properties-column .properties-sm-thumnail img, 
+.saved-properties-column .properties-sm-thumnail img,
 .saved-properties-column .saved-properties-image img {
     width: 100%;
 }
@@ -683,7 +683,7 @@ button.btn.cst-res-button {
 /*********************/
 
 @media (max-height: 750px) {
-    .custom-container { 
+    .custom-container {
         height: auto;
 
     }
@@ -1144,7 +1144,7 @@ body.add-to-cart-page {
     color: white;
     font-size: 15px;
     padding:1.3rem !important;
-    
+
 }
 .billing-address input{
     width: 100%;
@@ -1345,7 +1345,7 @@ body.add-to-cart-page {
     width: 100%;
     margin-top: 2%;
     border-bottom: 2px dotted lightgrey;
-    
+
 }
 .order-confirmation-table-details .book-details{
     display: flex;
@@ -1428,7 +1428,7 @@ body.add-to-cart-page {
     background: #ccc;
 } */
 .ui-tabs .ui-tabs-nav li a {
-    
+
 }
 .ui-tabs .ui-tabs-nav li a {
     position: relative;

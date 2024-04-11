@@ -21,14 +21,15 @@ class AuthController extends Controller
     }
     public function view_login()
     {
-        if(Auth::check()) {
-            if(auth()->user()->role == 'admin') {
+        if(auth()->check()) {
+            if(auth()->user()->role == 'Admin') {
                 return redirect()->route('admin.dashboard');
             } else {
                 return redirect()->route('user.dashboard');
             }
+        } else {
+            return view('auth.login');
         }
-        return view('auth.login');
     }
     public function createRegistration()
     {
@@ -45,10 +46,12 @@ class AuthController extends Controller
     {
         if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             $user = Auth::user();
+            // dd($user);
             $token = $user->createToken('Token')->accessToken;
             if ($user->role == "Admin") {
+                // dd('ok');
                 $notificationMessage = "login success";
-                return redirect(route('admin.dashboard'))->with($notificationMessage);
+                return redirect()->route('admin.dashboard')->with($notificationMessage);
             } else {
                 $notificationMessage = "login success";
                 return redirect(route('user.dashboard'))->with($notificationMessage);

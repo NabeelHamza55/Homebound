@@ -11,7 +11,7 @@
                         </div>
                         <div class="counter-text">
                             <span>Orders</span>
-                            <h3>24</h3>
+                            <h3>{{ $orders }}</h3>
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
 
                         <div class="counter-text">
                             <span>Properties</span>
-                            <h3>1.3K</h3>
+                            <h3>{{ $properties }}</h3>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="counter-text">
                             <span> Clients</span>
-                            <h3>4.5K</h3>
+                            <h3>{{ $clients }}</h3>
                         </div>
                     </div>
                 </div>
@@ -45,19 +45,35 @@
                         </div>
                         <div class="counter-text">
                             <span>Owners</span>
-                            <h3>6.3K</h3>
+                            <h3>{{ $owners }}</h3>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="dashboard-graph graph-text">
                 <h2 class="">Total Earnings</h2>
-                <span class="fw-bold ">$2.5k</span>
+                <span class="fw-bold ">${{ $earnings }}</span>
             </div>
             <div class="row">
                 <div id="chart" class="col-12"></div>
             </div>
         </div>
     </div>
+
+@endsection
+@section('scripts')
+
+    <script src="{{ asset('admin/libs/apexcharts/apexcharts.init.js') }}"></script>
+    <script>
+        chart.updateOptions({
+            xaxis: {
+                categories: @json($chartLabels)
+            }
+        });
+        chart.updateSeries([{
+            name: 'Orders',
+            data: @json($chartData),
+        }]);
+    </script>
 
 @endsection
