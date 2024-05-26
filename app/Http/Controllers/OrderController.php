@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-     public function order(Request $request)
+    public function order(Request $request)
     {
+        $templates = Order::where('user_id', auth()->user()->id)->get();
+        // dd($templates);
         if ($request->ajax()) {
-            $templates = Order::where('user_id', auth()->user()->id)->get();
+
             $data = DataTables()->of($templates)->make(true);
             return $data;
         }
@@ -43,8 +45,7 @@ class OrderController extends Controller
     {
         $books = [];
         $booksArray = json_decode($request->Books[0], true);
-        if($booksArray)
-        {
+        if ($booksArray) {
             foreach ($booksArray as $bookData) {
                 $bookId = $bookData['bookId'];
                 $quantity = $bookData['quantity'];
@@ -60,14 +61,11 @@ class OrderController extends Controller
                     $books[] = $currentBook;
                 }
             }
-            if ($books)
-            {
-                return view('order.card',compact('books'));
+            if ($books) {
+                return view('order.card', compact('books'));
             }
-        }
-        else
-        {
-            return redirect()->back()->with('message','Please select book');
+        } else {
+            return redirect()->back()->with('message', 'Please select book');
         }
     }
     public function checkout(Request $request)
@@ -75,8 +73,7 @@ class OrderController extends Controller
         $books = [];
         $booksArray = json_decode($request->Books[0], true);
 
-        if($booksArray)
-        {
+        if ($booksArray) {
             foreach ($booksArray as $bookData) {
                 $bookId = $bookData['bookId'];
                 $quantity = $bookData['quantity'];
@@ -87,7 +84,7 @@ class OrderController extends Controller
                     $books['quantity'] = $quantity;
                     $books['unit_price'] = $book->unit_price;
                     $books['id'] = $book->id;
-                    
+
                     $order = new Order();
                     $order->user_name = Auth::user()->name;
                     $order->book_title = $book->title;
@@ -101,9 +98,7 @@ class OrderController extends Controller
                     $cart->delete();
                 }
             }
-        }
-        else
-        {
+        } else {
             return redirect()->back()->with('error', 'please select book');
         }
     }

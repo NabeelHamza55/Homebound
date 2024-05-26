@@ -11,8 +11,8 @@ class PropertyController extends Controller
     public function index()
     {
         $userId = Auth::user()->id;
-        $properties = Property::where('user_id',$userId)->get();
-        return view('property.saveproperty',compact('properties'));
+        $properties = Property::where('user_id', $userId)->get();
+        return view('property.saveproperty', compact('properties'));
     }
     public function add_property()
     {
@@ -21,25 +21,24 @@ class PropertyController extends Controller
     public function create(Request $request)
     {
         $images = [];
-        if ($request->imagesArr)
-        {
+        if ($request->imagesArr) {
             $data = $request->imagesArr[0];
             $images = explode(',', $data);
         }
         $property = new Property();
         $home_pictures = $request->file('home_picture_input');
-        if ($home_pictures)
-        {
+        if ($home_pictures) {
             foreach ($home_pictures as $index => $homePicture) {
                 $publicPath = public_path('ProfilePicture/');
-                $publicPath = str_replace('/public/', '/', $publicPath);
+                // $publicPath = str_replace('/public/', '/', $publicPath);
                 $HomePictureName = time() . '_' . $index . '.' . $homePicture->getClientOriginalExtension();
                 $homePicture->move($publicPath, $HomePictureName);
-                $images[] = $HomePictureName ;
+                $images[] = $HomePictureName;
             }
         }
-        $images = array_filter($images, function($image) {
-        return preg_match('/\.(jpg|png|jpge)$/', $image);});
+        $images = array_filter($images, function ($image) {
+            return preg_match('/\.(jpg|png|jpge)$/', $image);
+        });
         $images = array_values($images);
         $property->images = json_encode($images);
         $property->price = $request->price ?? '';
@@ -82,8 +81,7 @@ class PropertyController extends Controller
     public function edit_property($id)
     {
         $property = Property::find($id);
-        return view('property.editProperty',compact('property'));
-
+        return view('property.editProperty', compact('property'));
     }
     public function delete_property($id)
     {
@@ -91,26 +89,23 @@ class PropertyController extends Controller
         if ($property) {
             $property->delete();
             return back()->with('success', 'Property deleted successfully');
-
         } else {
             return back()->with('error', 'Property not found');
         }
-
     }
     public function update_property(Request $request)
     {
         $property = Property::findOrFail($request->property_id);
         $images = json_decode($property->images);
         $selectedImagesArray = [];
-        if ($request ->selected_images)
-        {
+        if ($request->selected_images) {
             $selectedImagesArray = explode(',', $request->selected_images);
             $oldImagesArray = [];
             foreach ($images as $image) {
                 if (!in_array($image, $selectedImagesArray)) {
                     $oldImagesArray[] = $image;
                     $publicPath = public_path('ProfilePicture/');
-                    $publicPath = str_replace('/public/', '/', $publicPath);
+                    // $publicPath = str_replace('/public/', '/', $publicPath);
                     $oldPicturePath = $publicPath . basename($image);
                     if (file_exists($oldPicturePath)) {
                         unlink($oldPicturePath);
@@ -120,23 +115,19 @@ class PropertyController extends Controller
         }
         $home_pictures = $request->file('home_picture_input');
         $images = [];
-        if ($home_pictures)
-        {
+        if ($home_pictures) {
             foreach ($home_pictures as $index => $homePicture) {
                 $publicPath = public_path('ProfilePicture/');
                 $publicPath = str_replace('/public/', '/', $publicPath);
                 $HomePictureName = time() . '_' . $index . '.' . $homePicture->getClientOriginalExtension();
                 $homePicture->move($publicPath, $HomePictureName);
-                $images [] = $HomePictureName ;
+                $images[] = $HomePictureName;
             }
         }
-        if ($images)
-        {
+        if ($images) {
             $concatenatedArray = array_merge($selectedImagesArray, $images);
             $property->images = json_encode($concatenatedArray);
-        }
-        else
-        {
+        } else {
             $property->images = json_encode($selectedImagesArray);
         }
         $property->price = $request->price ?? $property->price;

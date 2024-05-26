@@ -10,9 +10,8 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('books', function (Blueprint $table) {
             $table->bigInteger('property_id')->nullable();
-            $table->bigInteger('is_approved')->default(false);
         });
     }
 
@@ -21,9 +20,8 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('books', function (Blueprint $table) {
             $table->dropColumn('property_id');
-            $table->dropColumn('is_approved');
         });
     }
 };

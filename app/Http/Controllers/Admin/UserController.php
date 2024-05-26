@@ -9,14 +9,24 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function clients()
+    public function clients(Request $request)
     {
-        $collection = User::where('role', 'User')->get();
+        $collection = User::where('role', 'User');
+        if($request->has('search_q') && $request->has('search_q')) {
+            $collection = $collection->where('name', 'LIKE', '%'. $request->get('search_q') .'%');
+        }
+        $collection = $collection->get();
+        // $collection = User::where('role', 'User')->get();
         return view('admin.dashboard.clients', compact('collection'));
     }
-    public function owners()
+    public function owners(Request $request)
     {
-        $collection = User::where('role', 'Admin')->get();
+        $collection = User::where('role', 'Admin');
+        if($request->has('search_q') && $request->has('search_q')) {
+            $collection = $collection->where('name', 'LIKE', '%'. $request->get('search_q') .'%');
+        }
+        $collection = $collection->get();
+        // $collection = User::where('role', 'Admin')->get();
         return view('admin.dashboard.owners', compact('collection'));
     }
     public function destroy($id)

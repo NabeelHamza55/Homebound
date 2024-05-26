@@ -152,9 +152,12 @@ h4{
 
                                     <div class="properties--button">
 
-                                        <a style="width: 30%;" href="{{route('edit.property',$property->id)}}" class="btn transparent cst-yellow-button">Edit</a>
-                                        <a style="width: 33%;" href="{{route('create.book',$property->id)}}" class="btn transparent cst-yellow-button">Create</a>
-                                        <a style="width: 33%;" href="{{route('delete.property',$property->id)}}" class="btn cst-yellow-button">Delete</a>
+                                        <a style="padding: 8px;
+    width: 30%;" href="{{route('edit.property',$property->id)}}" class="btn transparent cst-yellow-button">Edit</a>
+                                        <a style="padding: 8px;
+    width: 35%;" href="{{route('create.book',$property->id)}}" class="btn transparent cst-yellow-button">Create</a>
+                                        <a style="width: 33%;padding: 8px;
+    width: 35%;" href="{{route('delete.property',$property->id)}}" class="btn cst-yellow-button">Delete</a>
 
                                     </div>
 

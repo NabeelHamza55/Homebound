@@ -23,16 +23,19 @@
             <div class="container">
                 <div style="border-bottom: 2px solid #ebebeb;" class="row d-flex mt-4">
                     <div class="col-md-6">
-                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M13.4167 24.5C19.5378 24.5 24.5 19.5378 24.5 13.4167C24.5 7.29551 19.5378 2.33333 13.4167 2.33333C7.29552 2.33333 2.33334 7.29551 2.33334 13.4167C2.33334 19.5378 7.29552 24.5 13.4167 24.5Z"
-                                stroke="#B38A51" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M25.6667 25.6667L23.3333 23.3333" stroke="#B38A51" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <input style="border: none; background: none; outline: none;" placeholder="Search here"
-                            type="text">
+                        <form action="" method="GET">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M13.4167 24.5C19.5378 24.5 24.5 19.5378 24.5 13.4167C24.5 7.29551 19.5378 2.33333 13.4167 2.33333C7.29552 2.33333 2.33334 7.29551 2.33334 13.4167C2.33334 19.5378 7.29552 24.5 13.4167 24.5Z"
+                                    stroke="#B38A51" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M25.6667 25.6667L23.3333 23.3333" stroke="#B38A51" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <input style="border: none; background: none; outline: none; width: 80%"
+                                placeholder="Search here" type="text" name="search_q">
+                            <input type="submit" hidden name="search" id="search">
+                        </form>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end p-0">
                         <section class="back-home1">

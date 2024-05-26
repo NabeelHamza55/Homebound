@@ -15,6 +15,9 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::get('/properties', [PropertyController::class, 'index'])->name('admin.properties');
+    Route::get('/properties/create', [PropertyController::class, 'add'])->name('admin.property.create');
+    Route::post('/properties/create/save', [PropertyController::class, 'create'])->name('admin.property.create.save');
+    Route::get('/property/edit/{id}', [PropertyController::class, 'edit'])->name('admin.property.edit');
     Route::get('/property/detele/{id}', [PropertyController::class, 'destroy'])->name('admin.property.delete');
 
     Route::get('/earnings', [EarningController::class, 'index'])->name('admin.earnings');
