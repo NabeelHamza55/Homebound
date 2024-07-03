@@ -36,7 +36,7 @@ class PropertyController extends Controller
                 $images[] = $HomePictureName;
             }
         }
-        $images = array_filter($images, function ($image) {
+        array_filter($images, function ($image) {
             return preg_match('/\.(jpg|png|jpge)$/', $image);
         });
         $images = array_values($images);

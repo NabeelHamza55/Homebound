@@ -92,7 +92,16 @@ class BookController extends Controller
             $images_arr[] = $request->inner2;
         }
         if ($request->has('inner3')) {
-            $images_arr[] = $request->inner2;
+            $images_arr[] = $request->inner3;
+        }
+        if ($request->has('inner4')) {
+            $images_arr[] = $request->inner4;
+        }
+        if ($request->has('inner5')) {
+            $images_arr[] = $request->inner5;
+        }
+        if ($request->has('inner6')) {
+            $images_arr[] = $request->inner6;
         }
         $book = new Book();
         $publicPath = public_path('ProfilePicture');

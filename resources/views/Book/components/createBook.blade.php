@@ -72,11 +72,11 @@
             /* Rotate by 180 degrees to flip it right-side-up */
         }
 
-     .c_i_h img {
-    height: 100% !important;
-    width: 100% !important;
-    border-radius: 9px !important;
-}
+        .c_i_h img {
+            height: 100% !important;
+            width: 100% !important;
+            border-radius: 9px !important;
+        }
     </style>
     <section class="main-header">
         <nav class="navbar">
@@ -257,6 +257,9 @@
                 <input name="inner1" id="inner1_page" type="hidden">
                 <input name="inner2" id="inner2_page" type="hidden">
                 <input name="inner3" id="inner3_page" type="hidden">
+                <input name="inner4" id="inner4_page" type="hidden">
+                <input name="inner5" id="inner5_page" type="hidden">
+                <input name="inner6" id="inner6_page" type="hidden">
                 <input name="unit_price" value="10"type="hidden">
 
                 <div class="col-lg-12 upload-property-button d-flex">
@@ -271,6 +274,7 @@
             function handleFileUpload(inputId, dropTarget) {
                 var input = document.getElementById(inputId);
                 var files = input.files;
+                alert(files.length);
                 if (dropTarget === 'inner') {
                     var reader;
                     for (var i = 0; i < files.length; i++) {
@@ -371,7 +375,9 @@
 
                     // Append CSRF token to the form data
                     formData.append('_token', csrfToken);
-
+                    for (var pair of formData.entries()) {
+                        console.log(pair[0] + ': ' + pair[1]);
+                    }
                     // Make AJAX call
                     $.ajax({
                         url: "{{ route('save.book') }}",
@@ -380,7 +386,7 @@
                         contentType: false,
                         processData: false,
                         success: function(response) {
-                            debugger;
+                            // debugger;
                             var bookId = response.id;
                             $("#back-button").removeAttr("disabled");
                             $("#add_to_cart").attr("href", "{{ route('add.to.cart.item') }}/" +
